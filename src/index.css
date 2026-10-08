@@ -1,0 +1,130 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens from the Figma file "FROMSIA FLOWER SHOP".
+ * Colour names follow the Figma variables (background/ivory, text/tone-5, …).
+ * Figma's spacing steps (8, 16, 24, 32, 40, 64, 96) map onto Tailwind's
+ * default 4px scale (2, 4, 6, 8, 10, 16, 24), so no custom spacing is needed.
+ */
+@theme {
+  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-script: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
+
+  --color-ivory: #f6f1ea; /* background/ivory */
+  --color-charcoal: #24211f; /* text/charcoal */
+  --color-dusty-rose: #b88c83; /* brand/dusty-rose */
+  --color-tone-4: #cfc2b1; /* surface/tone-4 */
+  --color-tone-5: #71675f; /* text/tone-5 */
+  --color-tone-6: #98695f; /* text/tone-6 */
+  --color-tone-7: #d5c9bd; /* border/tone-7 */
+  --color-tone-8: #85574f; /* surface/tone-8 — primary button, hover */
+  --color-tone-9: #6e4742; /* surface/tone-9 — primary button, pressed */
+  --color-tone-10: #c9a399; /* surface/tone-10 — secondary button, hover */
+
+  /* Occasion cards rise in one after another when the section scrolls into view */
+  --animate-rise: rise 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+:root {
+  /* Width of the desktop frame in Figma */
+  --desktop-canvas-width: 1440;
+
+  /* One Figma pixel. A real pixel everywhere except inside a .desktop-canvas (below). */
+  --figma-px: 1px;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    min-width: 320px;
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-tone-6);
+    outline-offset: 3px;
+  }
+}
+
+/*
+ * Desktop canvas
+ * --------------
+ * A section built to the 1440px desktop frame. It is 1440px wide and centred on
+ * larger windows. On narrower windows it shrinks in proportion, so the
+ * composition keeps the frame's layout instead of reflowing.
+ *
+ * How: inside the canvas one "Figma pixel" is 1/1440 of the canvas width, and
+ * Tailwind's spacing unit is four of them. Every spacing, sizing and position
+ * utility (p-16, w-145, top-160, gap-7, leading-6 …) therefore scales with the
+ * canvas, as do the figma-text-* and figma-rounded-* utilities below. At 1440px
+ * and wider a Figma pixel is exactly 1px.
+ *
+ * Use it on the section element and put the layout in a single child:
+ *   <section class="desktop-canvas"><div class="relative h-201">…</div></section>
+ *
+ * Avoid arbitrary pixel values (w-[580px]) inside a canvas — they do not scale.
+ * Write them in spacing units instead (580 / 4 = w-145).
+ */
+@utility desktop-canvas {
+  container-type: inline-size;
+  width: 100%;
+  max-width: calc(var(--desktop-canvas-width) * 1px);
+  margin-inline: auto;
+
+  & > * {
+    --figma-px: calc(100cqw / var(--desktop-canvas-width));
+    --spacing: calc(var(--figma-px) * 4);
+  }
+}
+
+/*
+ * Type in Figma pixels: figma-text-<size>/<line-height>, e.g. figma-text-88/84.
+ * Line heights are the whole-pixel values Figma draws (88px at 96% is 84px, not
+ * 84.48px), which keeps every text block at the same height as the design.
+ */
+@utility figma-text-* {
+  font-size: calc(var(--figma-px) * --value(number));
+  line-height: calc(var(--figma-px) * --modifier(number));
+}
+
+/* Corner radius in Figma pixels: figma-rounded-6 */
+@utility figma-rounded-* {
+  border-radius: calc(var(--figma-px) * --value(number));
+}
+
+/* Horizontal scrollers keep native scrolling but hide the scrollbar */
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
