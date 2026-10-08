@@ -11,11 +11,9 @@ type CarouselArrowProps = {
   direction: Direction
   disabled: boolean
   onClick: () => void
-  /** id of the scroller this button controls */
   controls: string
 }
 
-/* Figma: "CarouselArrow" — Direction=Previous|Next × State=Default|Hover|Disabled */
 const ARTWORK: Record<Direction, { label: string; default: string; hover: string; disabled: string }> = {
   previous: {
     label: 'Previous occasions',
@@ -39,7 +37,6 @@ export function CarouselArrow({ direction, disabled, onClick, controls }: Carous
       type="button"
       aria-label={art.label}
       aria-controls={controls}
-      // aria-disabled (not disabled) keeps keyboard focus on the button when it reaches an end
       aria-disabled={disabled}
       onClick={disabled ? undefined : onClick}
       className={`group relative size-11 shrink-0 rounded-full ${disabled ? 'cursor-default' : 'cursor-pointer'}`}

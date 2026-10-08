@@ -3,7 +3,6 @@ export type NavLink = {
   href: string
 }
 
-/* Figma: "Primary navigation" */
 export const PRIMARY_NAV: NavLink[] = [
   { label: 'Shop', href: '#occasions' },
   { label: 'Classes', href: '#classes' },

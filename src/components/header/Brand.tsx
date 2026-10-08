@@ -1,7 +1,3 @@
-/**
- * Figma: "Brand" — wordmark, 72px rule, descriptor, stacked 4px apart.
- * Cormorant Garamond SemiBold 26/26 over Inter Regular 8/8.
- */
 export function Brand() {
   return (
     <a

@@ -1,9 +1,5 @@
 import { PRIMARY_NAV } from '../../data/navigation.ts'
 
-/**
- * Figma: "Primary navigation" — centred on the header, links 40px apart.
- * Each link is Inter Regular 14/17 with a 4px/12px hit area around the label.
- */
 export function PrimaryNav() {
   return (
     <nav

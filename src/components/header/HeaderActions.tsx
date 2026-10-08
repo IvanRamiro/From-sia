@@ -5,14 +5,9 @@ import { Button } from '../Button.tsx'
 
 const BAG_COUNT = 0
 
-/* Figma: "icon-hit-search" / "icon-hit-user" — 40px hit area around an 18px icon */
 const ICON_HIT_AREA = 'flex size-10 shrink-0 items-center justify-center'
 const ICON = 'size-4.5 shrink-0'
 
-/**
- * Figma: "Header actions" — search, account, bag with count, a 1×20px divider
- * and the "Order Flowers" button, 4px apart.
- */
 export function HeaderActions() {
   return (
     <div className="flex shrink-0 items-center gap-1">

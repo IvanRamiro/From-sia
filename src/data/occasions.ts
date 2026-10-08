@@ -21,11 +21,9 @@ export type Occasion = {
   id: string
   label: string
   href: string
-  /** One photo per Figma card size: mobile (296px), tablet (196px), desktop (202px) */
   image: { mobile: string; tablet: string; desktop: string }
 }
 
-/* Figma: "OccasionCarousel" — six categories, in this order */
 export const OCCASIONS: Occasion[] = [
   {
     id: 'birthday',

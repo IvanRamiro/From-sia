@@ -5,13 +5,6 @@ type Range = { first: number; last: number }
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-/**
- * Drives a native horizontal scroller with previous/next buttons.
- *
- * Touch swipe, trackpad scrolling and keyboard focus keep working because the
- * track is an ordinary overflow container; this hook only reports whether
- * there is more to see on either side and scrolls a "page" at a time.
- */
 export function useCarousel<T extends HTMLElement>() {
   const trackRef = useRef<T>(null)
   const [canPrev, setCanPrev] = useState(false)
@@ -60,7 +53,6 @@ export function useCarousel<T extends HTMLElement>() {
       settle = window.setTimeout(measureRange, 160)
     }
 
-    // Fires once on observe, then whenever the track or its content changes size
     const resizeObserver = new ResizeObserver(() => {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(measureEdges)

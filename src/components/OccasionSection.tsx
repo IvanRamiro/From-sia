@@ -6,17 +6,8 @@ import { useInView } from '../hooks/useInView.ts'
 import { CarouselArrow } from './occasions/CarouselArrow.tsx'
 import { OccasionCard } from './occasions/OccasionCard.tsx'
 
-/** Delay between one card and the next when the row first appears */
 const STAGGER_MS = 70
 
-/**
- * Figma: "From Sia · Mobile / Tablet / Desktop shop by occasion"
- * (SectionHeader + OccasionCarousel).
- *
- *   mobile  — 24px gutter, header stacked, 296px cards 16px apart, row runs off the right edge
- *   tablet  — 32px gutter, header in one row with arrows, 196px cards 20px apart, runs off the right edge
- *   desktop — 64px gutter, 202px cards 20px apart; all six fit at 1440
- */
 export function OccasionSection() {
   const headingId = useId()
   const trackId = useId()

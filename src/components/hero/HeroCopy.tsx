@@ -1,16 +1,7 @@
 type HeroCopyProps = {
-  /** id for the <h1>, so the section can be labelled by it */
   headingId: string
 }
 
-/**
- * Figma: "eyebrow-row", "Hero headline" and "Hero description".
- *
- *   eyebrow      Inter Medium 11/18, tone-5, after a 24px rule
- *   headline     Cormorant Garamond 88/84, three lines overlapping by 4px;
- *                "beautiful" is italic in tone-6, 16px after "life’s"
- *   description  Inter Regular 16/26, tone-5, 400px wide, broken after "workshops,"
- */
 export function HeroCopy({ headingId }: HeroCopyProps) {
   return (
     <>

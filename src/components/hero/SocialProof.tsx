@@ -2,20 +2,12 @@ import portraitLeft from '../../assets/figma/photos/portrait-left-40.png'
 import portraitMiddle from '../../assets/figma/photos/portrait-middle-40.png'
 import portraitRight from '../../assets/figma/photos/portrait-right-40.png'
 
-/*
- * Figma: "Flower lovers" — three 40px portraits overlapping at x = 0, 26 and 52.
- * Listed right to left so the left-most portrait is painted on top, as in Figma.
- */
 const PORTRAITS = [
   { src: portraitRight, position: 'left-13' },
   { src: portraitMiddle, position: 'left-6.5' },
   { src: portraitLeft, position: 'left-0' },
 ]
 
-/**
- * Figma: "Community endorsement" > "Social proof" — portraits, star rating and
- * endorsement line, with 20px of space above the row.
- */
 export function SocialProof() {
   return (
     <div className="w-full pt-5">

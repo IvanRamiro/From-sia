@@ -74,25 +74,6 @@
   }
 }
 
-/*
- * Desktop canvas
- * --------------
- * A section built to the 1440px desktop frame. It is 1440px wide and centred on
- * larger windows. On narrower windows it shrinks in proportion, so the
- * composition keeps the frame's layout instead of reflowing.
- *
- * How: inside the canvas one "Figma pixel" is 1/1440 of the canvas width, and
- * Tailwind's spacing unit is four of them. Every spacing, sizing and position
- * utility (p-16, w-145, top-160, gap-7, leading-6 …) therefore scales with the
- * canvas, as do the figma-text-* and figma-rounded-* utilities below. At 1440px
- * and wider a Figma pixel is exactly 1px.
- *
- * Use it on the section element and put the layout in a single child:
- *   <section class="desktop-canvas"><div class="relative h-201">…</div></section>
- *
- * Avoid arbitrary pixel values (w-[580px]) inside a canvas — they do not scale.
- * Write them in spacing units instead (580 / 4 = w-145).
- */
 @utility desktop-canvas {
   container-type: inline-size;
   width: 100%;
@@ -105,22 +86,15 @@
   }
 }
 
-/*
- * Type in Figma pixels: figma-text-<size>/<line-height>, e.g. figma-text-88/84.
- * Line heights are the whole-pixel values Figma draws (88px at 96% is 84px, not
- * 84.48px), which keeps every text block at the same height as the design.
- */
 @utility figma-text-* {
   font-size: calc(var(--figma-px) * --value(number));
   line-height: calc(var(--figma-px) * --modifier(number));
 }
 
-/* Corner radius in Figma pixels: figma-rounded-6 */
 @utility figma-rounded-* {
   border-radius: calc(var(--figma-px) * --value(number));
 }
 
-/* Horizontal scrollers keep native scrolling but hide the scrollbar */
 @utility scrollbar-none {
   scrollbar-width: none;
 

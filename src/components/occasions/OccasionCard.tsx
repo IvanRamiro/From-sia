@@ -1,14 +1,6 @@
 import categoryArrow from '../../assets/figma/icons/category-arrow.svg'
 import type { Occasion } from '../../data/occasions.ts'
 
-/**
- * Figma: "OccasionCard" — Size=Mobile (296) | Tablet (196) | Desktop (202),
- * State=Default | Hover | Focused.
- *
- * Hover:   photo scales to 1.035 and brightens (+0.035 exposure), label turns
- *          tone-6, arrow moves 6px right, all over 400ms.
- * Focused: 2px tone-6 border on the photo.
- */
 export function OccasionCard({ occasion }: { occasion: Occasion }) {
   return (
     <a
