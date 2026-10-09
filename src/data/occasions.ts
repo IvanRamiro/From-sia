@@ -17,14 +17,20 @@ import sympathyDesktop from '../assets/figma/photos/occasion-sympathy-desktop.jp
 import sympathyMobile from '../assets/figma/photos/occasion-sympathy-mobile.jpg'
 import sympathyTablet from '../assets/figma/photos/occasion-sympathy-tablet.jpg'
 
+export type OccasionImage = {
+  mobile: string
+  tablet: string
+  desktop: string
+}
+
 export type Occasion = {
   id: string
   label: string
   href: string
-  image: { mobile: string; tablet: string; desktop: string }
+  image: OccasionImage
 }
 
-export const OCCASIONS: Occasion[] = [
+export const OCCASIONS: readonly Occasion[] = [
   {
     id: 'birthday',
     label: 'Birthday',

@@ -1,8 +1,8 @@
-import { Header } from './components/Header.tsx'
-import { Hero } from './components/Hero.tsx'
-import { OccasionSection } from './components/OccasionSection.tsx'
+import { Header } from './components/header/Header.tsx'
+import { Hero } from './components/hero/Hero.tsx'
+import { OccasionSection } from './components/occasions/OccasionSection.tsx'
 
-function App() {
+export function App() {
   return (
     <div className="min-h-svh bg-ivory text-charcoal">
       <Header />
@@ -13,5 +13,3 @@ function App() {
     </div>
   )
 }
-
-export default App

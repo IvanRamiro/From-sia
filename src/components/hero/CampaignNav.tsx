@@ -1,40 +1,57 @@
+import { classNames } from '../../utils/classNames.ts'
+
 type CampaignNavProps = {
   count: number
   activeIndex: number
   onSelect: (index: number) => void
 }
 
-const pad = (value: number) => String(value).padStart(2, '0')
-
-const MARKER = {
-  base: 'block figma-rounded-1 transition-[width,height,background-color] duration-300 ease-out motion-reduce:transition-none',
-  active: 'h-0.5 w-8 bg-tone-6',
-  inactive: 'h-px w-4 bg-tone-7',
+function formatCampaignNumber(index: number): string {
+  return String(index + 1).padStart(2, '0')
 }
 
-const NUMBER = {
-  base: 'figma-text-11/13 whitespace-nowrap',
-  active: 'font-bold text-charcoal',
-  inactive: 'font-normal text-tone-5',
-}
+const NAV_LAYOUT = classNames(
+  'flex justify-center pt-4',
+  'md:absolute md:top-1/2 md:right-px md:block md:-translate-y-1/2 md:pt-0',
+  'xl:top-116.5',
+)
+
+const LIST_LAYOUT = 'flex items-center gap-6 px-3 py-2 md:flex-col md:items-end md:gap-4'
+
+const BUTTON_LAYOUT =
+  'flex cursor-pointer flex-col-reverse items-center gap-1.25 py-1.5 md:flex-row md:gap-2.5'
 
 export function CampaignNav({ count, activeIndex, onSelect }: CampaignNavProps) {
   return (
-    <nav aria-label="Campaigns" className="absolute top-101.5 right-px -translate-y-1/2">
-      <ol className="flex flex-col items-end gap-4 px-3 py-2">
+    <nav aria-label="Campaigns" className={NAV_LAYOUT}>
+      <ol className={LIST_LAYOUT}>
         {Array.from({ length: count }, (_, index) => {
-          const state = index === activeIndex ? 'active' : 'inactive'
+          const isActive = index === activeIndex
+
           return (
             <li key={index}>
               <button
                 type="button"
                 aria-label={`Campaign ${index + 1} of ${count}`}
-                aria-current={state === 'active' ? 'true' : undefined}
+                aria-current={isActive ? 'true' : undefined}
                 onClick={() => onSelect(index)}
-                className="flex cursor-pointer items-center gap-2.5 py-1.5"
+                className={BUTTON_LAYOUT}
               >
-                <span aria-hidden="true" className={`${MARKER.base} ${MARKER[state]}`} />
-                <span className={`${NUMBER.base} ${NUMBER[state]}`}>{pad(index + 1)}</span>
+                <span
+                  aria-hidden="true"
+                  className={classNames(
+                    'block figma-rounded-1 transition-[width,height,background-color] duration-300 ease-out motion-reduce:transition-none',
+                    isActive ? 'h-0.5 w-8 bg-tone-6' : 'h-px w-4 bg-tone-7',
+                  )}
+                />
+                <span
+                  className={classNames(
+                    'figma-text-11/13 whitespace-nowrap',
+                    isActive ? 'font-bold text-charcoal' : 'font-normal text-tone-5',
+                  )}
+                >
+                  {formatCampaignNumber(index)}
+                </span>
               </button>
             </li>
           )

@@ -1,28 +1,23 @@
 @import 'tailwindcss';
 
-/*
- * Design tokens from the Figma file "FROMSIA FLOWER SHOP".
- * Colour names follow the Figma variables (background/ivory, text/tone-5, …).
- * Figma's spacing steps (8, 16, 24, 32, 40, 64, 96) map onto Tailwind's
- * default 4px scale (2, 4, 6, 8, 10, 16, 24), so no custom spacing is needed.
- */
 @theme {
   --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-script: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
 
-  --color-ivory: #f6f1ea; /* background/ivory */
-  --color-charcoal: #24211f; /* text/charcoal */
-  --color-dusty-rose: #b88c83; /* brand/dusty-rose */
-  --color-tone-4: #cfc2b1; /* surface/tone-4 */
-  --color-tone-5: #71675f; /* text/tone-5 */
-  --color-tone-6: #98695f; /* text/tone-6 */
-  --color-tone-7: #d5c9bd; /* border/tone-7 */
-  --color-tone-8: #85574f; /* surface/tone-8 — primary button, hover */
-  --color-tone-9: #6e4742; /* surface/tone-9 — primary button, pressed */
-  --color-tone-10: #c9a399; /* surface/tone-10 — secondary button, hover */
+  --color-ivory: #f6f1ea;
+  --color-charcoal: #24211f;
+  --color-dusty-rose: #b88c83;
+  --color-tone-4: #cfc2b1;
+  --color-tone-5: #71675f;
+  --color-tone-6: #98695f;
+  --color-tone-7: #d5c9bd;
+  --color-tone-8: #85574f;
+  --color-tone-9: #6e4742;
+  --color-tone-10: #c9a399;
 
-  /* Occasion cards rise in one after another when the section scrolls into view */
+  --container-page: 90rem;
+
   --animate-rise: rise 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 
   @keyframes rise {
@@ -38,10 +33,7 @@
 }
 
 :root {
-  /* Width of the desktop frame in Figma */
   --desktop-canvas-width: 1440;
-
-  /* One Figma pixel. A real pixel everywhere except inside a .desktop-canvas (below). */
   --figma-px: 1px;
 }
 
@@ -77,12 +69,24 @@
 @utility desktop-canvas {
   container-type: inline-size;
   width: 100%;
-  max-width: calc(var(--desktop-canvas-width) * 1px);
+  max-width: var(--container-page);
   margin-inline: auto;
 
   & > * {
     --figma-px: calc(100cqw / var(--desktop-canvas-width));
     --spacing: calc(var(--figma-px) * 4);
+  }
+}
+
+@utility gutter {
+  --gutter: calc(var(--spacing) * 6);
+
+  @variant md {
+    --gutter: calc(var(--spacing) * 8);
+  }
+
+  @variant xl {
+    --gutter: calc(var(--spacing) * 16);
   }
 }
 
